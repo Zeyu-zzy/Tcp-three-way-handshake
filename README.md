@@ -1,5 +1,5 @@
 # Tcp-three-way-handshake
-Implement three-way handshake of TCP with rawsocket on Linux
+Implement three-way handshake of TCP with rawsocket on Ubuntu 16.04
 
 ```
 sudo iptables -A OUTPUT -p tcp --tcp-flags RST RST -j DROP
