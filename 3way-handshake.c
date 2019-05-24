@@ -103,7 +103,7 @@ int main(int argc, char *argv[]){
 
     struct sockaddr_in sin;
     sin.sin_family = PF_INET;
-    sin.sin_port = htons(80);
+    sin.sin_port = htons(DEST_PORT);
     //sin.sin_addr.s_addr = addr_list[i]->s_addr;
     sin.sin_addr.s_addr = inet_addr(DEST_IP);
 
@@ -203,7 +203,7 @@ int main(int argc, char *argv[]){
         if(recv_ip->protocol == IPPROTO_TCP && recv_ip->source_ip == sin.sin_addr.s_addr){
             // right ip
             PTCP_HEADER recv_tcp = (PTCP_HEADER)(((uint8_t*)recv_packet) + sizeof(IP_HEADER));
-            if(recv_tcp->dest_port == htons(1234) && recv_tcp->source_port == htons(80) && recv_tcp->ack == htonl(sequence)){
+            if(recv_tcp->dest_port == htons(SOURCE_PORT) && recv_tcp->source_port == htons(DEST_PORT) && recv_tcp->ack == htonl(sequence)){
                 // second handshake ACK+SYN
                 printf("Three-way handshake: receive SYN + ACK!\n");
                 tcp->ack = htonl(ntohl(recv_tcp->seq) + 1);
